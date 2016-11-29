@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>循环js</title>
+	<script type="text/javascript" src="loopjs.js"></script>
+</head>
+<body>
+	<p>for ... in</p>
+	<p>for循环的一个变体是for ... in循环，它可以把一个对象的所有属性依次循环出来：</p>
+	<script type="text/javascript">
+		var o={
+			name:"Olive",
+			age:26,
+			city:"BeiJing"
+		}
+		for (var key in o) {
+			document.writeln(key);// 'name', 'age', 'city'
+		}
+	</script>
+	<p>要过滤掉对象继承的属性，用hasOwnProperty()来实现：</p>
+	<script type="text/javascript">
+		for (var key in o) {
+			if (o.hasOwnProperty(key)) {
+				document.writeln(key)
+			}
+		}
+	</script>
+	<p>
+		由于Array也是对象，而它的每个元素的索引被视为对象的属性，因此，for ... in循环可以直接循环出Array的索引：
+	</p>
+	<script type="text/javascript">
+		var a=["a","b","c"];
+		for (var i in a) {
+			document.writeln(i); // '0', '1', '2'
+			document.writeln(a[i]); // 'A', 'B', 'C'
+		}
+	</script>
+	<b>请注意，for ... in对Array的循环得到的是String而不是Number。</b>
+
+	<div>
+		<p>while</p>
+
+		<p>for循环在已知循环的初始和结束条件时非常有用。而上述忽略了条件的for循环容易让人看不清循环的逻辑，此时用while循环更佳。</p>
+
+		<p>while循环只有一个判断条件，条件满足，就不断循环，条件不满足时则退出循环。比如我们要计算100以内所有奇数之和，可以用while循环实现</p>
+	</div>
+	<script type="text/javascript">
+		var wx=0;
+		var wn=99;
+		while(wn>0){
+			wx=wx+wn
+			wn=wn-2;
+		}
+		document.writeln(wx);//得到2500就是正确了
+	</script>
+	<div>
+		<p>do ... while</p>
+
+		<p>最后一种循环是do { ... } while()循环，它和while循环的唯一区别在于，不是在每次循环开始的时候判断条件，而是在每次循环完成的时候判断条件：</p>
+		<p>
+			<b>用do { ... } while()循环要小心，循环体会至少执行1次，而for和while循环则可能一次都不执行。</b>
+		</p>
+	</div>
+	<script type="text/javascript">
+		var don=0;
+		do{
+			don++
+		}while(don<100);
+		document.writeln(don);
+	</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>循环练习题</title>
+</head>
+<body>
+	<p>尝试for循环和while循环，并以正序、倒序两种方式遍历。</p>
+	<p>利用循环遍历数组中的每个名字，并显示Hello, xxx!。数组为var arr = ['Bart', 'Lisa', 'Adam'];</p>
+	<script type="text/javascript">
+		'use strict';
+		// 正序
+		var arr = ['Bart', 'Lisa', 'Adam'];
+		for(var key in arr){
+		  document.writeln("hello,"+ arr[key]+"!");
+		}
+		//倒序
+		var x=arr.length;
+		while(x>0){
+		    x--;
+		    document.writeln("hello,"+arr[x]+"!");
+		}
+	</script>
+</body>
+</html>
