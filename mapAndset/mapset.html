@@ -5,6 +5,43 @@
 	<title>map set</title>
 </head>
 <body>
-	
+	<p>		初始化Map需要一个二维数组，或者直接初始化一个空Map。Map具有以下方法：
+	</p>
+	<script type="text/javascript">
+		var m= new Map();//空map
+		m.set("Mike",90);//添加新的key-value
+		m.set("Bob",40);
+		m.set("Cat",88);
+		document.writeln(m.has("Mike"));//判断是否存在Mike这个值
+		document.writeln(m.get('Bob'));//获取Bob的成绩
+		m.delete('Cat');
+		document.writeln(m.has('Cat'));
+	</script>
+	<p>
+		一个key只能对应一个value，所以，多次对一个key放入value，后面的值会把前面的值冲掉
+	</p>
+	<p><b>Set</b></p>
+	<p>
+		Set和Map类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在Set中，没有重复的key。<br><br>
+
+		要创建一个Set，需要提供一个Array作为输入，或者直接创建一个空Set：
+	</p>
+	<script type="text/javascript">
+		var s1=new Set();//空Set
+		var s2=new Set([1,2,3]);//含1,2,3
+	</script>
+	<p>重复元素在Set中自动被过滤：</p>
+	<p>通过add(key)方法可以添加元素到Set中，可以重复添加，但不会有效果</p>
+	<p>通过delete(key)方法可以删除元素</p>
+	<script type="text/javascript">
+		var ss=new Set([1,2,3,3,"3"]);//ss为 Set{1, 2, 3, "3"}
+		ss.add(4);//添加一个key-value
+		ss;//ss变为Set{1,2,3,"3",4}
+		ss.delete("3");//删掉字符”3
+		ss;//ss变为Set{1,2,3,4}
+	</script>
+	<p>
+		Map和Set是ES6标准新增的数据类型，请根据浏览器的支持情况决定是否要使用。
+	</p>
 </body>
 </html>
