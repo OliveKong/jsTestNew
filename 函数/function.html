@@ -100,5 +100,35 @@
 		}
 	</script>
 	<p>要把中间的参数b变为“可选”参数，就只能通过arguments判断，然后重新调整参数并赋值。</p>
+	<script type="text/javascript">
+		function foo2(a, b) {
+		    var i, rest = [];
+		    if (arguments.length > 2) {
+		        for (i = 2; i<arguments.length; i++) {
+		            rest.push(arguments[i]);
+		        }
+		    }
+		    document.writeln('a = ' + a);
+		    document.writeln('b = ' + b);
+		    document.writeln("rest为"+rest);
+		}
+		foo2(2,6,7);
+	</script>
+	<p>
+		为了获取除了已定义参数a、b之外的参数，我们不得不用arguments，并且循环要从索引2开始以便排除前两个参数，这种写法很别扭，只是为了获得额外的rest参数，有没有更好的方法？
+	</p>
+	<p>ES6标准引入了rest参数，上面的函数可以改写为：</p>
+	<script type="text/javascript">
+		function foo3(a,b,...rest) {
+			document.writeln("a="+a);
+			document.writeln("b="+b);
+			document.writeln("rest为"+rest);
+		}
+		foo3(1,2,3,4,5,6);//a=1;b=2;rest=[3,4,5,6]
+		foo3(1);//a=1;b=undefined;rest=[]
+	</script>
+	<p>est参数只能写在最后，前面用...标识，从运行结果可知，传入的参数先绑定a、b，多余的参数以数组形式交给变量rest，所以，不再需要arguments我们就获取了全部参数。
+
+	如果传入的参数连正常定义的参数都没填满，也不要紧，rest参数会接收一个空数组（注意不是undefined）。</p>
 </body>
 </html>

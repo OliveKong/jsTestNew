@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		'use strict';
+		function sum(...rest) {
+			var sum=0;
+			for (var i = 0; i <rest.length; i++) {
+				sum=sum+rest[i];
+			}
+			document.writeln(sum);
+			return sum;
+		}
+		sum(1,2,3,4,5,6,7,8,9,10);
+	</script>
+</head>
+<body>
+	<p>
+		r: 表示圆的半径；
+		pi: 表示π的值，如果不传，则默认3.14
+	</p>
+	<script type="text/javascript">
+		'use strict';
+		function area(r,pi) {
+			var m;
+			if (arguments.length===1) {
+				pi=3.14;
+			}
+			m=r*r*pi;
+			document.writeln(m);
+			return m;//此处必须有返回值,函数若想得到值必须要有返回值
+		}
+		area(2,3.1416);
+		area(2);
+		// 测试:
+		if (area(2) === 12.56 && area(2,3.1416) === 12.5664) {
+		    alert('测试通过');
+		} else {
+		    alert('测试失败');
+		}
+	</script>
+	<p></p>
+</body>
+</html>
