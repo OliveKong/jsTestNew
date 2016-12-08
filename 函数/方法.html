@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>方法</title>
+</head>
+<body>
+	<p>在一个对象中绑定函数，称为这个对象的方法</p>
+	<p>在JavaScript中，对象的定义是这样的：</p>
+	<script type="text/javascript">
+		'use strict';
+		var xiaoming={
+			name:"小明",
+			birth:1990
+		}
+	</script>
+	<p>但是，如果我们给xiaoming绑定一个函数，就可以做更多的事情。比如，写个age()方法，返回xiaoming的年龄：</p>
+	<script type="text/javascript">
+		var xiaohong={
+			name:'小红',
+			birth:1990,
+			age:function (argument) {
+				var y=new Date().getFullYear();
+				return y-this.birth;
+			}
+		}
+		xiaohong.age;// function xiaoming.age()
+		document.writeln(xiaohong.age());//2016年是26,2017年是27，以此类推
+	</script>
+	<p>绑定到对象上的函数称为方法，和普通函数也没啥区别，但是它在内部使用了一个this关键字，这个东东是什么？</p>
+	<p>在一个方法内部，this是一个特殊变量，它始终指向当前对象，也就是xiaohong这个变量。所以，this.birth可以拿到xiaohong的birth属性。</p>
+	<p>让我们拆开写：</p>
+	<script type="text/javascript">
+		function getAge() {
+			var y=new Date().getFullYear();
+			return y-this.birth;
+		}
+		var xiaoming={
+			name:'xiaoming',
+			birth:1990,
+			age:getAge
+		}
+		document.writeln(xiaoming.age()); // 26, 正常结果
+		document.writeln(getAge());// NaN
+	</script>
+	<p>单独调用函数getAge()怎么返回了NaN？请注意，我们已经进入到了JavaScript的一个大坑里。</p>
+	<p>JavaScript的函数内部如果调用了this，那么这个this到底指向谁？</p>
+	<p>答案是，视情况而定！</p>
+	<p>如果以对象的方法形式调用，比如xiaoming.age()，该函数的this指向被调用的对象，也就是xiaoming，这是符合我们预期的。</p>
+	<p>如果单独调用函数，比如getAge()，此时，该函数的this指向全局对象，也就是window。</p>
+	<p>更坑爹的是，如果这么写：</p>
+	<script type="text/javascript">
+		var fn=xiaoming.age; // 先拿到xiaoming的age函数
+		document.writeln(fn());//NaN
+	</script>
+	<p>也是不行的！要保证this指向正确，必须用obj.xxx()的形式调用！</p>
+	<p>由于这是一个巨大的设计错误，要想纠正可没那么简单。ECMA决定，在strict模式下让函数的this指向undefined，因此，在strict模式下，你会得到一个错误：</p>
+	<script type="text/javascript">
+		'use strict';
+
+		var xiaoming = {
+		    name: '小明',
+		    birth: 1990,
+		    age: function () {
+		        var y = new Date().getFullYear();
+		        return y - this.birth;
+		    }
+		};
+
+		var fn = xiaoming.age;
+		fn(); // Uncaught TypeError: Cannot read property 'birth' of undefined
+	</script>
+	
+</body>
+</html>
